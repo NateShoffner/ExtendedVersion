@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>ExtendedVersion</id>
+    <version>1.0</version>
+    <title>Extended Version Wrapper</title>
+    <authors>Nate Shoffner</authors>
+    <owners>Nate Shoffner</owners>
+    <licenseUrl>https://github.com/NateShoffner/ExtendedVersion/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/NateShoffner/ExtendedVersion/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Wrapper for existing System.Version type with additional functionality.</description>
+    <releaseNotes>v1.0 - 8/25/2017:
+	* Initial deployment.</releaseNotes>
+    <copyright>Copyright Nate Shoffner 2017</copyright>
+    <tags>Version, Git, Mercurial, Version Control</tags>
+  </metadata>
+  <files>
+    <file src="bin\Release\ExtendedVersion.dll" target="lib\net35\ExtendedVersion.dll" />
+    <file src="bin\Release\ExtendedVersion.XML" target="lib\net35\ExtendedVersion.XML" />
+  </files>
+</package>
