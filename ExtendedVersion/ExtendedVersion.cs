@@ -262,6 +262,15 @@ namespace ExtendedVersion
         }
 
         /// <summary>
+        /// Returns a traditonal System.Version object.
+        /// </summary>
+        /// <returns></returns>
+        public Version ToVersion()
+        {
+            return new Version(Major, Minor, Build, Revision);
+        }
+
+        /// <summary>
         ///     Represents a Sha-1 hash.
         /// </summary>
         public class Sha1Hash
