@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>ExtendedVersion</id>
-    <version>1.0.1</version>
+    <version>$version$</version>
     <title>Extended Version Wrapper</title>
     <authors>Nate Shoffner</authors>
     <owners>Nate Shoffner</owners>
@@ -10,7 +10,9 @@
     <projectUrl>https://github.com/NateShoffner/ExtendedVersion/</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Wrapper for existing System.Version type with additional functionality.</description>
-    <releaseNotes>v1.0.1 - 8/27/2017:
+    <releaseNotes>v1.0.2 - 10/18/2018:
+	* Added: AppVeyor support
+	v1.0.1 - 8/27/2017:
 	* Added: ToVersion() method.
 	v1.0 - 8/25/2017:
 	* Initial deployment.</releaseNotes>

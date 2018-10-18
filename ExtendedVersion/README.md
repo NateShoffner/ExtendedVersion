@@ -1,7 +1,18 @@
 ExtendedVersion
 ====================
 
+Wrapper for existing System.Version type with additional functionality.
+
 [![Build status](https://ci.appveyor.com/api/projects/status/3pwbphfts68hla63?svg=true)](https://ci.appveyor.com/project/NateShoffner/extendedversion)
+
+## Download & Installation
+Nuget Package [ExtendedVersion](https://www.nuget.org/packages/ExtendedVersion/)
+
+```
+
+Install-Package ExtendedVersion
+
+```
 
  ### License ###
 
