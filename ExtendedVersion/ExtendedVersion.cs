@@ -30,9 +30,6 @@ namespace ExtendedVersion
             var spaceSplit = dashSplit[0].Split(' ');
             var decimalSplit = spaceSplit[0].Split('.');
 
-            if (decimalSplit.Length < 2)
-                throw new ArgumentException("String must contain at least 2 decimals.", str);
-
             var major = 0;
             var minor = 0;
             var revision = 0;
