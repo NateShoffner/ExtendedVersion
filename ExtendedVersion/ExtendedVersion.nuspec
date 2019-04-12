@@ -10,7 +10,10 @@
     <projectUrl>https://github.com/NateShoffner/ExtendedVersion/</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Wrapper for existing System.Version type with additional functionality.</description>
-    <releaseNotes>v1.0.2 - 10/18/2018:
+    <releaseNotes>v1.0.3 4/12/2019
+	* Changed: Bumped .NET Framework to 4.6.1
+	* Added: Build Regex property
+	v1.0.2 - 10/18/2018:
 	* Added: AppVeyor support
 	v1.0.1 - 8/27/2017:
 	* Added: ToVersion() method.
