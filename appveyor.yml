@@ -15,7 +15,7 @@ before_build:
 build_script:
   - cmd: dotnet publish -c Release
 after_build:
-  - cmd: dotnet pack ./ExtendedVersion/ExtendedVersion.csproj --configuration Release /p:Version='{version}'
+  - cmd: dotnet pack ./ExtendedVersion/ExtendedVersion.csproj --configuration Release
 artifacts:
  - path: '.\ExtendedVersion\bin\Release\netcoreapp2.1\publish'
    name: ExtendedVersion
