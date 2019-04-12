@@ -1,20 +1,19 @@
-version: 1.0.2.{build}
+version: 1.0.3.{build}
 os: Visual Studio 2017
 configuration: Release
 platform: Any CPU
-assembly_info:
+dotnet_csproj:
   patch: true
-  file: AssemblyInfo.*
-  assembly_version: "{version}"
-  assembly_file_version: "{version}"
-  assembly_informational_version: "{version}-$(APPVEYOR_REPO_COMMIT)"
+  file: 'ExtendedVersion\*.csproj'
+  version: '{version}'
+  package_version: '{version}'
+  assembly_version: '{version}'
+  file_version: '{version}'
+  informational_version: '{version}-$(APPVEYOR_REPO_COMMIT)'
 before_build:
   - ps: nuget restore
 build:
   project: ExtendedVersion.sln
-after_build:
-- ps: >-
-    .\ExtendedVersion\nuget_pack.ps1
 artifacts:
 - path: '*.nupkg'
   name: nuget_package
