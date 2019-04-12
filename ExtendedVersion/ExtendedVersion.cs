@@ -11,20 +11,6 @@ namespace ExtendedVersion
         private static readonly Regex DefaultBuildRegex = new Regex(@"\(Build (\d+)\)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         private Regex _buildRegex;
 
-
-        /// <summary>
-        /// Build version string regular expression.
-        /// </summary>
-        public Regex BuildRegex
-        {
-            get
-            {
-                return _buildRegex == null ? DefaultBuildRegex : DefaultBuildRegex;
-            }
-
-            set { _buildRegex = value; }
-        }
-
         /// <summary>
         ///     Initializes a new ExtendedVersion.
         /// </summary>
@@ -39,7 +25,9 @@ namespace ExtendedVersion
         public ExtendedVersion(string str)
         {
             if (str == null)
+            {
                 throw new ArgumentNullException("str");
+            }
 
             var dashSplit = str.Split('-');
             var spaceSplit = dashSplit[0].Split(' ');
@@ -52,22 +40,38 @@ namespace ExtendedVersion
             Sha1Hash hash = null;
 
             if (!int.TryParse(decimalSplit[0], out major))
+            {
                 throw new ArgumentException("Version components must contain integers.", str);
+            }
+
             if (decimalSplit.Length >= 1 && !int.TryParse(decimalSplit[0], out major))
+            {
                 throw new ArgumentException("Version components must contain integers.", str);
+            }
+
             if (decimalSplit.Length >= 2 && !int.TryParse(decimalSplit[1], out minor))
+            {
                 throw new ArgumentException("Version components must contain integers.", str);
+            }
+
             if (decimalSplit.Length >= 3 && !int.TryParse(decimalSplit[2], out revision))
+            {
                 throw new ArgumentException("Version components must contain integers.", str);
+            }
+
             if (decimalSplit.Length >= 4 && !int.TryParse(decimalSplit[3], out build))
+            {
                 throw new ArgumentException("Version components must contain integers.", str);
+            }
 
             // extract build version
             if (build == 0)
             {
                 var match = BuildRegex.Match(str);
                 if (match.Groups.Count > 1)
+                {
                     int.TryParse(match.Groups[1].Value, out build);
+                }
             }
 
             // check for commit id after dash
@@ -115,13 +119,28 @@ namespace ExtendedVersion
         public ExtendedVersion(Version version, Sha1Hash commit = null)
         {
             if (version == null)
+            {
                 throw new ArgumentNullException("version");
+            }
 
             Major = version.Major;
             Minor = version.Minor;
             Revision = version.Build;
             Build = version.Revision;
             Commit = commit;
+        }
+
+
+        /// <summary>
+        ///     Build version string regular expression.
+        /// </summary>
+        public Regex BuildRegex
+        {
+            get => _buildRegex == null
+                ? DefaultBuildRegex
+                : DefaultBuildRegex;
+
+            set => _buildRegex = value;
         }
 
         /// <summary>
@@ -152,11 +171,15 @@ namespace ExtendedVersion
         public int CompareTo(object version)
         {
             if (version == null)
+            {
                 return 1;
+            }
 
             var v = version as ExtendedVersion;
             if (v == null)
+            {
                 throw new ArgumentException("version");
+            }
 
             return CompareTo(v);
         }
@@ -164,7 +187,10 @@ namespace ExtendedVersion
         public bool Equals(ExtendedVersion obj)
         {
             if (obj == null)
+            {
                 return false;
+            }
+
             return Major == obj.Major && Minor == obj.Minor && Build == obj.Build && Revision == obj.Revision;
         }
 
@@ -176,7 +202,9 @@ namespace ExtendedVersion
         /// <returns>true if v1 equals v2; otherwise, false.</returns>
         public static bool operator ==(ExtendedVersion v1, ExtendedVersion v2)
         {
-            return ReferenceEquals(v1, null) ? ReferenceEquals(v2, null) : v1.Equals(v2);
+            return ReferenceEquals(v1, null)
+                ? ReferenceEquals(v2, null)
+                : v1.Equals(v2);
         }
 
         /// <summary>
@@ -199,7 +227,10 @@ namespace ExtendedVersion
         public static bool operator <(ExtendedVersion v1, ExtendedVersion v2)
         {
             if ((object) v1 == null)
+            {
                 throw new ArgumentNullException("v1");
+            }
+
             return v1.CompareTo(v2) < 0;
         }
 
@@ -212,7 +243,10 @@ namespace ExtendedVersion
         public static bool operator <=(ExtendedVersion v1, ExtendedVersion v2)
         {
             if ((object) v1 == null)
+            {
                 throw new ArgumentNullException("v1");
+            }
+
             return v1.CompareTo(v2) <= 0;
         }
 
@@ -248,7 +282,9 @@ namespace ExtendedVersion
 
             // include build component if it's not to be appended
             if ((flags & ExtendedVersionFormatFlags.Build) == ExtendedVersionFormatFlags.Build)
+            {
                 baseStr += $".{Build}";
+            }
 
             // truncate version string
             if ((flags & ExtendedVersionFormatFlags.Truncated) == ExtendedVersionFormatFlags.Truncated)
@@ -259,22 +295,33 @@ namespace ExtendedVersion
                 }
 
                 if (!baseStr.Contains("."))
+                {
                     baseStr = $"{baseStr}.0";
+                }
             }
 
             if ((flags & ExtendedVersionFormatFlags.BuildString) == ExtendedVersionFormatFlags.BuildString && Build > 0)
+            {
                 baseStr += $" (Build {Build})";
+            }
 
             if (Commit != null)
+            {
                 if ((flags & ExtendedVersionFormatFlags.CommitFull) == ExtendedVersionFormatFlags.CommitFull)
+                {
                     baseStr += $" {Commit}";
+                }
                 else if ((flags & ExtendedVersionFormatFlags.CommitShort) == ExtendedVersionFormatFlags.CommitShort)
+                {
                     baseStr += $" {Commit.ToShorthandString()}";
+                }
+            }
+
             return baseStr;
         }
 
         /// <summary>
-        /// Returns a traditonal System.Version object.
+        ///     Returns a traditonal System.Version object.
         /// </summary>
         /// <returns></returns>
         public Version ToVersion()
@@ -294,10 +341,14 @@ namespace ExtendedVersion
             internal Sha1Hash(string hash)
             {
                 if (hash == null)
+                {
                     throw new ArgumentNullException("hash");
+                }
 
                 if (hash.Length != MinHashLength && hash.Length != MaxHashLength)
+                {
                     throw new ArgumentException($"Hash must be between {MinHashLength} and {MaxHashLength} characters long.");
+                }
 
                 _hash = hash;
             }
@@ -350,28 +401,44 @@ namespace ExtendedVersion
         public int CompareTo(ExtendedVersion other)
         {
             if (Major != other.Major)
+            {
                 if (Major > other.Major)
+                {
                     return 1;
-                else
-                    return -1;
+                }
+
+                return -1;
+            }
 
             if (Minor != other.Minor)
+            {
                 if (Minor > other.Minor)
+                {
                     return 1;
-                else
-                    return -1;
+                }
+
+                return -1;
+            }
 
             if (Revision != other.Revision)
+            {
                 if (Revision > other.Revision)
+                {
                     return 1;
-                else
-                    return -1;
+                }
+
+                return -1;
+            }
 
             if (Build != other.Build)
+            {
                 if (Build > other.Build)
+                {
                     return 1;
-                else
-                    return -1;
+                }
+
+                return -1;
+            }
 
             return 0;
         }
@@ -395,7 +462,10 @@ namespace ExtendedVersion
         {
             var v = obj as ExtendedVersion;
             if (v == null)
+            {
                 return false;
+            }
+
             return Major == v.Major && Minor == v.Minor && Build == v.Build && Revision == v.Revision;
         }
 
