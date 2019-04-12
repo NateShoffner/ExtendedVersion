@@ -20,7 +20,7 @@ artifacts:
  - path: '.\ExtendedVersion\bin\Release\netcoreapp2.1\publish'
    name: ExtendedVersion
    type: WebDeployPackage
- - path: '*.nupkg'
+ - path: '.\ExtendedVersion\bin\Release\*.nupkg'
    name: nuget_package
 deploy:
   - provider: NuGet
