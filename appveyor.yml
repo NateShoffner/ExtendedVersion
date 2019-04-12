@@ -16,7 +16,7 @@ before_build:
 build_script:
   - cmd: dotnet publish -c Release
 artifacts:
- - path: 'ExtendedVersion\bin\Debug\netcoreapp2.1\publish'
+ - path: '\src\bin\Release\netcoreapp2.2\publish'
    name: ExtendedVersion
    type: WebDeployPackage
 deploy: off
