@@ -19,7 +19,7 @@
 	* Added: ToVersion() method.
 	v1.0 - 8/25/2017:
 	* Initial deployment.</releaseNotes>
-    <copyright>Copyright Nate Shoffner 2017</copyright>
+    <copyright>Copyright Nate Shoffner 2019</copyright>
     <tags>Version, Git, Mercurial, Version Control</tags>
   </metadata>
   <files>

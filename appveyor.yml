@@ -1,23 +1,27 @@
-version: 1.0.2.{build}
+version: 1.0.3.{build}
 os: Visual Studio 2017
 configuration: Release
-platform: Any CPU
-assembly_info:
+dotnet_csproj:
   patch: true
-  file: AssemblyInfo.*
-  assembly_version: "{version}"
-  assembly_file_version: "{version}"
-  assembly_informational_version: "{version}-$(APPVEYOR_REPO_COMMIT)"
+  file: '**\*.csproj'
+  version: '{version}'
+  package_version: '{version}'
+  assembly_version: '{version}'
+  file_version: '{version}'
+  informational_version: '{version}-$(APPVEYOR_REPO_COMMIT)'
 before_build:
-  - ps: nuget restore
-build:
-  project: ExtendedVersion.sln
+  - cmd: dotnet --version
+  - cmd: dotnet restore ./ExtendedVersion/ExtendedVersion.csproj --verbosity m
+build_script:
+  - cmd: dotnet publish -c Release
 after_build:
-- ps: >-
-    .\ExtendedVersion\nuget_pack.ps1
+  - cmd: dotnet pack ./ExtendedVersion/ExtendedVersion.csproj --configuration Release
 artifacts:
-- path: '*.nupkg'
-  name: nuget_package
+ - path: '.\ExtendedVersion\bin\Release\netcoreapp2.1\publish'
+   name: ExtendedVersion
+   type: WebDeployPackage
+ - path: '.\ExtendedVersion\bin\Release\*.nupkg'
+   name: nuget_package
 deploy:
   - provider: NuGet
     api_key:
