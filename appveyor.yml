@@ -4,12 +4,15 @@ configuration: Release
 platform: Any CPU
 dotnet_csproj:
   patch: true
-  file: '**\*.csproj'
+  file: './ExtendedVersion.csproj'
   version: '{version}'
   package_version: '{version}'
   assembly_version: '{version}'
   file_version: '{version}'
   informational_version: '{version}-$(APPVEYOR_REPO_COMMIT)'
+before_build:
+  - cmd: dotnet --version
+  - cmd: dotnet restore ./ExtendedVersion/ExtendedVersion.csproj --verbosity m
 build_script:
   - cmd: dotnet publish -c Release
 artifacts:
