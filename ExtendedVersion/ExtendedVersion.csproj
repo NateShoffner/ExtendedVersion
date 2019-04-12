@@ -10,7 +10,7 @@
     <Product>ExtendedVersion</Product>
     <Version>1.0.3.0</Version>
     <Description>Wrapper for existing System.Version type with additional functionality.</Description>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
 
 </Project>
