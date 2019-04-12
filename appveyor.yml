@@ -14,6 +14,8 @@ before_build:
   - cmd: dotnet restore ./ExtendedVersion/ExtendedVersion.csproj --verbosity m
 build_script:
   - cmd: dotnet publish -c Release
+after_build:
+  - cmd: dotnet pack ExtendedVersion.csproj --configuration Release /p:Version="{version}"
 artifacts:
  - path: '.\ExtendedVersion\bin\Release\netcoreapp2.1\publish'
    name: ExtendedVersion

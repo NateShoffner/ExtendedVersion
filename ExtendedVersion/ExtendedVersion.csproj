@@ -11,6 +11,7 @@
     <Version>1.0.3.0</Version>
     <Description>Wrapper for existing System.Version type with additional functionality.</Description>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <IsPackable>true</IsPackable>
   </PropertyGroup>
 
 </Project>
