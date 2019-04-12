@@ -8,7 +8,22 @@ namespace ExtendedVersion
     /// </summary>
     public class ExtendedVersion : IComparable, IComparable<ExtendedVersion>, IEquatable<ExtendedVersion>
     {
-        private static readonly Regex BuildRegex = new Regex(@"\(Build (\d+)\)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        private static readonly Regex DefaultBuildRegex = new Regex(@"\(Build (\d+)\)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        private Regex _buildRegex;
+
+
+        /// <summary>
+        /// Build version string regular expression.
+        /// </summary>
+        public Regex BuildRegex
+        {
+            get
+            {
+                return _buildRegex == null ? DefaultBuildRegex : DefaultBuildRegex;
+            }
+
+            set { _buildRegex = value; }
+        }
 
         /// <summary>
         ///     Initializes a new ExtendedVersion.
@@ -47,8 +62,8 @@ namespace ExtendedVersion
             if (decimalSplit.Length >= 4 && !int.TryParse(decimalSplit[3], out build))
                 throw new ArgumentException("Version components must contain integers.", str);
 
-            // extract build version from (Build num) format
-            if (str.IndexOf("(Build ", StringComparison.OrdinalIgnoreCase) >= 0 && build == 0)
+            // extract build version
+            if (build == 0)
             {
                 var match = BuildRegex.Match(str);
                 if (match.Groups.Count > 1)
